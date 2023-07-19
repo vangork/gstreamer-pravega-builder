@@ -1,0 +1,5 @@
+image:
+  repository: "devops-repo.isus.emc.com:8116/nautilus/pravega/pravega-pytorch:latest"
+  pullPolicy: "Always"
+
+inputStream: "street"

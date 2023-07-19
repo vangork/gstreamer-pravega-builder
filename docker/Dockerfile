@@ -43,3 +43,12 @@ RUN apt-get update && \
 
 COPY --from=builder /root/gstreamer-pravega/target/release/libgstpravega.so /usr/lib/x86_64-linux-gnu/gstreamer-1.0/
 WORKDIR /opt
+
+
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
+COPY inference.py inference.py
+
+COPY docker/entrypoint.sh /entrypoint.sh
+CMD ["/entrypoint.sh"]

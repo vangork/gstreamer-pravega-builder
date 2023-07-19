@@ -1,0 +1,12 @@
+version: '3.0'
+
+services:
+  inference:
+    image: pravega/pravega-pytorch
+    environment:
+      PRAVEGA_CONTROLLER_URI: tcp://127.0.0.1:9090
+      PRAVEGA_SCOPE: examples
+      INPUT_STREAM: street
+      ENTRYPOINT: /opt/inference.py
+    network_mode: host
+    restart: always

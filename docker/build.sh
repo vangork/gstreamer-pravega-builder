@@ -21,9 +21,11 @@ docker pull ${BASE_IMAGE}
 
 # Build pravega-prod image which includes the binaries for all applications.
 DOCKER_BUILDKIT=1 docker build \
-    -t pravega/gstreamer:pravega-prod \
+    -t pravega/pravega-pytorch \
     --build-arg RUST_JOBS=${RUST_JOBS} \
     --build-arg BASE_IMAGE=${BASE_IMAGE} \
+    --build-arg HTTP_PROXY="http://172.17.0.1:19000" \
+    --build-arg HTTPS_PROXY="http://172.17.0.1:19000" \
     --target prod \
     -f ${ROOT_DIR}/docker/Dockerfile \
     ${ROOT_DIR}

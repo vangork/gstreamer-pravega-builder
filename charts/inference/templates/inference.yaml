@@ -1,0 +1,24 @@
+apiVersion: gstreamer.dellemc.com/v1alpha1
+kind: GStreamerPipeline
+metadata:
+  name: {{ $.Release.Name }}-inference
+spec:
+  image: {{ $.Values.image.repository | quote }}
+  pullPolicy: {{ $.Values.image.pullPolicy | quote }}
+  livenessProbe:
+    enabled: false
+  state: Running
+  env:
+    - name: ENTRYPOINT
+      value: /opt/inference.py
+    - name: GST_DEBUG
+      value: "WARNING,pravegasrc:DEBUG"
+    - name: INPUT_STREAM
+      value: {{ $.Values.inputStream | quote }}
+  resources:
+    requests:
+      cpu: "2"
+      memory: 2G
+    limits:
+      cpu: "2"
+      memory: 2G
